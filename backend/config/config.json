@@ -1,0 +1,41 @@
+{
+    "listeners": [
+        {
+            "address": "0.0.0.0",
+            "port": 8080,
+            "https": false
+        }
+    ],
+    "app": {
+        "threads_num": 4,
+        "enable_session": true,
+        "session_timeout": 1200,
+        "document_root": "./",
+        "upload_path": "./uploads",
+        "max_connections": 100000,
+        "max_connections_per_ip": 0,
+        "load_config_file": "./config/app_config.json"
+    },
+    "logging": {
+        "logfile_base_name": "./logs/process_monitor",
+        "log_level": "INFO",
+        "log_size_limit": 100000000,
+        "max_files": 10
+    },
+    "cors": {
+        "allow_all": true,
+        "allow_origins": ["http://localhost:3000"],
+        "allow_methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    },
+    "plugins": [
+        {
+            "name": "ProcessMonitorPlugin",
+            "config": {
+                "monitor_interval": 5000,
+                "max_restart_attempts": 3,
+                "restart_delay": 30000
+            }
+        }
+    ]
+}
