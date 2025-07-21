@@ -1,14 +1,22 @@
-# Version 3.10 or higher is required
-cmake_minimum_required(VERSION 3.10)
+# Create backend executable with all source files
+add_executable(ProcessMonitorBackend
+    main.cpp
+    # utils/logger.cpp  # Uncomment when you add this file
+)
 
-# Set the project name and language
-project(ProcessMonitor CXX)
+# Include directories (for header files)
+target_include_directories(ProcessMonitorBackend
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    # ${CMAKE_CURRENT_SOURCE_DIR}/utils  # Uncomment when you add utils
+)
 
-# add the C++ standard
-set(CMAKE_CXX_STANDARD 17)  
-
-# Ensure the C++ standard is required
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# execute the backend CMakeLists.txt
-add_executable(ProcessMonitor main.cpp)
+# Link required libraries
+target_link_libraries(ProcessMonitorBackend
+    PRIVATE
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    ZLIB::ZLIB
+    pthread
+    Crow::Crow
+)
