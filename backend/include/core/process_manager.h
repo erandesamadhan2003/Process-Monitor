@@ -8,15 +8,14 @@ namespace core {
     public: 
         virtual ~ProcessManager() = default;
 
-        // start a process by name
-        virtual void startProcess(const std::string& processName) = 0;
+        // Process Lifecycle Management
+        virtual bool startProcess(const std::string& processId) = 0;
+        virtual bool stopProcess(const std::string& processId) = 0;
+        virtual bool restartProcess(const std::string& processId) = 0;
+        virtual bool killProcess(const std::string& processId) = 0;
 
-        //stop a process by name
-        virtual void stopProcess(const std::string& processName) = 0;
-
-        // Get the status of a process by name
-        virtual std::string getProcessStatus(const std::string& processName) = 0;
-
+        // Process Monitoring
+        
     };
 }
 
